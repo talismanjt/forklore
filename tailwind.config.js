@@ -10,6 +10,7 @@ module.exports = {
         100: "#1B263B",
         200: "#415A77",
         300: "#778DA9",
+        350: "#d3d4d2",
         400: "#E0E1DD",
       },
       success: {
@@ -48,5 +49,4 @@ module.exports = {
     },
   },
   plugins: [],
-}
-
+};

@@ -13,10 +13,14 @@ const CustomButton = ({
   return (
     <TouchableOpacity
       onPress={onPress}
-      className={`flex-row justify-center items-center bg-secondary-400 text-primary px-10 py-4 rounded-md gap-2 ${className}`}
+      className={`flex-row justify-center items-center px-10 py-4 rounded-md gap-2 ${className}`}
     >
       {IconLeft && <IconLeft />}
-      <Text>{title}</Text>
+      <Text
+        className={`font-medium ${textVariant === "primary" ? "text-primary" : "text-secondary-400"}`}
+      >
+        {title}
+      </Text>
       {IconRight && <IconRight />}
     </TouchableOpacity>
   );
