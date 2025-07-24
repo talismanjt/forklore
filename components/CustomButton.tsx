@@ -17,7 +17,7 @@ const CustomButton = ({
     >
       {IconLeft && <IconLeft />}
       <Text
-        className={`font-medium ${textVariant === "primary" ? "text-primary" : "text-secondary-400"}`}
+        className={`font-semibold ${textVariant === "primary" ? "text-primary" : "text-secondary-400"}`}
       >
         {title}
       </Text>
