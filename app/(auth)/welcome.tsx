@@ -3,7 +3,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import CustomButton from "@/components/CustomButton";
 import { Image } from "expo-image";
 import { useNavigation } from "expo-router";
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, useState } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import {
   BottomSheetModal,
@@ -12,10 +12,10 @@ import {
 } from "@gorhom/bottom-sheet";
 import Login from "@/app/(auth)/login";
 import CustomHandle from "@/components/CustomHandle";
+import Signup from "@/app/(auth)/signup";
 
 const Welcome = () => {
-  const navigation = useNavigation();
-
+  const [modalType, setModalType] = useState<"login" | "signup">("login");
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ["90%"], []);
   const handlePresentModal = () => {
@@ -60,14 +60,18 @@ const Welcome = () => {
                 textVariant={"primary"}
                 title={"Get Started"}
                 onPress={() => {
-                  navigation.navigate("signup");
+                  setModalType("signup");
+                  handlePresentModal();
                 }}
               />
               <CustomButton
                 className={"w-full bg-secondary-100 text-secondary-400"}
                 textVariant={"secondary"}
                 title={"I Already have an account"}
-                onPress={handlePresentModal}
+                onPress={() => {
+                  setModalType("login");
+                  handlePresentModal();
+                }}
               />
             </View>
           </View>
@@ -87,7 +91,13 @@ const Welcome = () => {
           >
             <BottomSheetView>
               <View className={"flex w-full justify-center items-center"}>
-                <Login />
+                {modalType === "login" ? (
+                  <Login onClose={() => bottomSheetModalRef.current?.close()} />
+                ) : (
+                  <Signup
+                    onClose={() => bottomSheetModalRef.current?.close()}
+                  />
+                )}
               </View>
             </BottomSheetView>
           </BottomSheetModal>

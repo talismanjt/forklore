@@ -1,7 +1,14 @@
-import { Text, TextInput, TouchableOpacity, View } from "react-native";
+import {
+  KeyboardAvoidingView,
+  Text,
+  TouchableOpacity,
+  View,
+  Platform,
+} from "react-native";
 import CustomButton from "@/components/CustomButton";
 import { Ionicons } from "@expo/vector-icons";
 import { BottomSheetView } from "@gorhom/bottom-sheet";
+import CustomInput from "@/components/CustomInput";
 
 const Login = ({ onClose }: { onClose?: () => void }) => {
   return (
@@ -12,60 +19,71 @@ const Login = ({ onClose }: { onClose?: () => void }) => {
         justifyContent: "center",
       }}
     >
-      <Text className="text-2xl font-semibold text-secondary-400 mb-8 text-center">
-        Create an account
-      </Text>
-
-      <TextInput
-        placeholder="Email"
-        placeholderTextColor="#778DA9"
-        className="w-full bg-secondary-350 px-5 py-4 rounded-md mb-4"
-      />
-      <TextInput
-        placeholder="Password"
-        secureTextEntry
-        placeholderTextColor="#778DA9"
-        className="w-full bg-secondary-400 px-5 py-4 rounded-md mb-6"
-      />
-
-      <CustomButton
-        title="Log In"
-        className="w-full bg-secondary-300 mb-6"
-        textVariant="primary"
-        onPress={onClose}
-      />
-
-      <TouchableOpacity onPress={onClose}>
-        <Text className="text-md text-secondary-400 mb-14 text-center">
-          Forgot your Password?
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{ flex: 1 }}
+      >
+        <Text className="text-2xl font-semibold text-secondary-400 mb-1 text-center">
+          Log In
         </Text>
-      </TouchableOpacity>
+        <Text className="text-md text-secondary-400 mb-6 text-center">
+          Welcome back! Please enter your details.
+        </Text>
 
-      <View className="h-px bg-secondary-400 opacity-40 w-full mb-14" />
+        <CustomInput
+          Icon={() => <Ionicons name="mail" size={24} color="gray" />}
+          placeholder="Enter your email"
+          placeholderTextColor="#778DA9"
+          label={"Email"}
+        />
+        <CustomInput
+          placeholder="Enter your password"
+          secureTextEntry={true}
+          placeholderTextColor="#778DA9"
+          label={"Password"}
+        />
 
-      <CustomButton
-        title="Continue with Google"
-        className="w-full bg-secondary-300 mb-4"
-        IconLeft={() => <Ionicons name="logo-google" size={24} color="#000" />}
-        textVariant="primary"
-        onPress={() => {}}
-      />
-      <CustomButton
-        title="Continue with Facebook"
-        className="w-full bg-secondary-300 mb-4"
-        IconLeft={() => (
-          <Ionicons name="logo-facebook" size={24} color="#000" />
-        )}
-        textVariant="primary"
-        onPress={() => {}}
-      />
-      <CustomButton
-        title="Continue with Apple"
-        className="w-full bg-secondary-300 mb-20"
-        IconLeft={() => <Ionicons name="logo-apple" size={24} color="#000" />}
-        textVariant="primary"
-        onPress={() => {}}
-      />
+        <TouchableOpacity onPress={onClose}>
+          <Text className="text-md text-secondary-400 text-left mb-10">
+            Forgot your Password?
+          </Text>
+        </TouchableOpacity>
+
+        <CustomButton
+          title="Log In"
+          className="w-full bg-secondary-300"
+          textVariant="primary"
+          onPress={onClose}
+        />
+
+        <View className="h-px bg-secondary-400 opacity-40 w-full my-8" />
+
+        <CustomButton
+          title="Continue with Google"
+          className="w-full bg-secondary-300 mb-4"
+          IconLeft={() => (
+            <Ionicons name="logo-google" size={24} color="#000" />
+          )}
+          textVariant="primary"
+          onPress={() => {}}
+        />
+        <CustomButton
+          title="Continue with Facebook"
+          className="w-full bg-secondary-300 mb-4"
+          IconLeft={() => (
+            <Ionicons name="logo-facebook" size={24} color="#000" />
+          )}
+          textVariant="primary"
+          onPress={() => {}}
+        />
+        <CustomButton
+          title="Continue with Apple"
+          className="w-full bg-secondary-300 mb-20"
+          IconLeft={() => <Ionicons name="logo-apple" size={24} color="#000" />}
+          textVariant="primary"
+          onPress={() => {}}
+        />
+      </KeyboardAvoidingView>
     </BottomSheetView>
   );
 };
