@@ -123,7 +123,7 @@ const Signup = ({ onClose }: { onClose?: () => void }) => {
 
         <CustomButton
           title={loading ? "Signing up..." : "Sign up"}
-          className={"w-full bg-secondary-300"}
+          className={"w-full bg-secondary-300 mt-5"}
           textVariant={"primary"}
           onPress={handleSubmit(onSubmit)}
           disabled={loading}

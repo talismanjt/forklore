@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "TaskOwl",
-    "slug": "TaskOwl",
+    "name": "RecipeOwl",
+    "slug": "RecipeOwl",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "taskowl",
+    "scheme": "recipeowl",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
@@ -17,7 +17,7 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.jtimpac.TaskOwl"
+      "package": "com.jtimpac.RecipeOwl"
     },
     "web": {
       "bundler": "metro",

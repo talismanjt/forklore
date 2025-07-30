@@ -9,12 +9,23 @@ export default function Index() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Check current session
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
+      setLoading(false); // Set loading to false AFTER session is fetched
     });
-    supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-    });
+
+    // Listen for auth changes
+    const { data: listener } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setSession(session);
+      },
+    );
+
+    // Clean up the listener
+    return () => {
+      listener.subscription.unsubscribe();
+    };
   }, []);
 
   // Show loading while checking auth state
