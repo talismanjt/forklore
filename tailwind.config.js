@@ -6,13 +6,13 @@ module.exports = {
   theme: {
     extend: {},
     colors: {
-      primary: "#0D1B2A",
+      primary: "#3E3F29",
       secondary: {
-        100: "#1B263B",
-        200: "#415A77",
-        300: "#778DA9",
-        350: "#d3d4d2",
-        400: "#E0E1DD",
+        100: "#2E2F23",
+        200: "#7D8D86",
+        300: "#BCA88D",
+        350: "#C8C4A6",
+        400: "#F1F0E4",
       },
       success: {
         100: "#F0FFF4",

@@ -4,41 +4,43 @@ import { Ionicons } from "@expo/vector-icons";
 import CustomButton from "@/components/CustomButton";
 import { useRouter } from "expo-router";
 import { supabase } from "@/lib/supabase";
-
-type Todo = {
-  id: number;
-  title: string;
-  done: boolean;
-};
-const todos: Todo[] = [
-  { id: 1, title: "Buy milk", done: false },
-  { id: 2, title: "Walk the dog", done: false },
-  { id: 3, title: "Learn React Native", done: true },
-  { id: 4, title: "Write an app", done: false },
-  { id: 5, title: "Eat dinner", done: false },
-];
+import { useEffect, useState } from "react";
+import { User } from "@supabase/supabase-js";
 
 const Dashboard = () => {
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const { data, error } = await supabase.auth.getUser();
+        if (error) {
+          console.log(error);
+        } else {
+          setUser(data.user);
+          setLoading(false);
+        }
+      } catch (err) {
+        console.error("Unexpected error:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    void getUser();
+  }, []);
+
   const router = useRouter();
 
   return (
     <SafeAreaView className={"flex-1 justify-center items-center bg-white"}>
-      <Ionicons
-        className={"flex-1 justify-center items-center"}
-        name={"menu"}
-        size={24}
-        color={"#000"}
-      />
-      <FlatList
-        data={todos}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <View>
-            <Text>{item.title}</Text>
-            <Text>{item.done.toString()}</Text>
-          </View>
-        )}
-      />
+      <Text className={"text-md text-secondary-200 text-center"}>
+        Welcome{" "}
+        <Text className={"font-semibold text-secondary-100"}>
+          {user?.email}
+        </Text>
+      </Text>
+
       <CustomButton
         title={"Logout"}
         className={"bg-secondary-100"}

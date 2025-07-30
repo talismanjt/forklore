@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "RecipeOwl",
-    "slug": "RecipeOwl",
+"name": "Forklore",
+"slug": "Forklore",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "recipeowl",
+"scheme": "forklore",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
@@ -17,7 +17,7 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.jtimpac.RecipeOwl"
+"package": "com.jtimpac.Forklore"
     },
     "web": {
       "bundler": "metro",

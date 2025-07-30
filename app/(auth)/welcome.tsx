@@ -1,8 +1,7 @@
-import { AppState, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CustomButton from "@/components/CustomButton";
 import { Image } from "expo-image";
-import { useNavigation } from "expo-router";
 import { useMemo, useRef, useState } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import {
@@ -32,13 +31,13 @@ const Welcome = () => {
             className={"flex w-full justify-center items-center p-10 gap-4"}
           >
             <Image
-              source={require("../../assets/images/taskowl-logo.png")}
+              source={require("../../assets/images/forklore-logo.png")}
               style={{ width: 180, height: 100 }}
               contentFit={"contain"}
             />
             <Image
               source={require("../../assets/images/welcome.png")}
-              style={{ width: "100%", height: 300 }}
+              style={{ width: "100%", height: 300, marginBottom: 20 }}
               contentFit={"contain"}
             />
             <Text
@@ -46,7 +45,7 @@ const Welcome = () => {
                 "w-full text-2xl font-bold text-secondary-400 text-center"
               }
             >
-              Welcome to TaskOwl
+              Welcome to Forklore
             </Text>
             <Text
               className={"w-full text-md text-secondary-400 text-center mb-5"}
@@ -86,7 +85,7 @@ const Welcome = () => {
             enableDismissOnClose
             enablePanDownToClose
             backgroundStyle={{
-              backgroundColor: "#1B263B",
+              backgroundColor: "#2E2F23",
             }}
           >
             <BottomSheetView>
