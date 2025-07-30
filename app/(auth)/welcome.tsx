@@ -50,8 +50,7 @@ const Welcome = () => {
             <Text
               className={"w-full text-md text-secondary-400 text-center mb-5"}
             >
-              Have plenty to do? Boost your productivity with our evolving task
-              management tools.
+              Get cooking with ease! Discover new flavors and organize your kitchen adventures with our dynamic recipe management tool.
             </Text>
             <View className={"w-full gap-5"}>
               <CustomButton
