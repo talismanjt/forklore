@@ -4,13 +4,52 @@ import {
   TouchableOpacity,
   View,
   Platform,
+  Alert,
 } from "react-native";
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { useState } from "react";
 import CustomButton from "@/components/CustomButton";
 import { Ionicons } from "@expo/vector-icons";
 import { BottomSheetView } from "@gorhom/bottom-sheet";
 import CustomInput from "@/components/CustomInput";
+import { supabase } from "@/lib/supabase";
+import { useRouter } from "expo-router";
+
+const FormSchema = z.object({
+  email: z.string().email("Invalid email address"),
+  password: z.string().min(6, "Password must be at least 6 characters"),
+});
 
 const Login = ({ onClose }: { onClose?: () => void }) => {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+  });
+
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
+    setLoading(true);
+    const { error } = await supabase.auth.signInWithPassword({
+      email: data.email,
+      password: data.password,
+    });
+
+    if (error) {
+      Alert.alert(error.message);
+    } else {
+      onClose?.();
+      router.navigate("/(tabs)/dashboard");
+    }
+    setLoading(false);
+  }
+
   return (
     <BottomSheetView
       style={{
@@ -30,17 +69,43 @@ const Login = ({ onClose }: { onClose?: () => void }) => {
           Welcome back! Please enter your details.
         </Text>
 
-        <CustomInput
-          Icon={() => <Ionicons name="mail" size={24} color="gray" />}
-          placeholder="Enter your email"
-          placeholderTextColor="#778DA9"
-          label={"Email"}
+        <Controller
+          control={control}
+          name="email"
+          render={({ field: { onChange, onBlur, value } }) => (
+            <CustomInput
+              Icon={() => <Ionicons name="mail" size={20} color="gray" />}
+              placeholder="Enter your email"
+              placeholderTextColor="#778DA9"
+              label="Email"
+              onChangeText={onChange}
+              onBlur={onBlur}
+              value={value}
+              error={errors.email?.message}
+            />
+          )}
         />
-        <CustomInput
-          placeholder="Enter your password"
-          secureTextEntry={true}
-          placeholderTextColor="#778DA9"
-          label={"Password"}
+        <Controller
+          control={control}
+          name="password"
+          render={({ field: { onChange, onBlur, value } }) => (
+            <CustomInput
+              Icon={() => (
+                <Ionicons name="lock-closed" size={20} color="gray" />
+              )}
+              placeholder="Enter your password"
+              secureTextEntry={!isPasswordVisible}
+              setSecureTextEntry={() =>
+                setIsPasswordVisible(!isPasswordVisible)
+              }
+              placeholderTextColor="#778DA9"
+              label="Password"
+              onChangeText={onChange}
+              onBlur={onBlur}
+              value={value}
+              error={errors.password?.message}
+            />
+          )}
         />
 
         <TouchableOpacity onPress={onClose}>
@@ -50,10 +115,11 @@ const Login = ({ onClose }: { onClose?: () => void }) => {
         </TouchableOpacity>
 
         <CustomButton
-          title="Log In"
+          title={loading ? "Logging in..." : "Log In"}
           className="w-full bg-secondary-300"
           textVariant="primary"
-          onPress={onClose}
+          onPress={handleSubmit(onSubmit)}
+          disabled={loading}
         />
 
         <View className="h-px bg-secondary-400 opacity-40 w-full my-8" />

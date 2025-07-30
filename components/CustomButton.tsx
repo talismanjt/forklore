@@ -1,6 +1,7 @@
 import { Text, TouchableOpacity } from "react-native";
 
 const CustomButton = ({
+  disabled,
   title,
   onPress,
   bgVariant = "primary",
@@ -13,6 +14,7 @@ const CustomButton = ({
   return (
     <TouchableOpacity
       onPress={onPress}
+      disabled={disabled}
       className={`flex-row justify-center items-center px-10 py-4 rounded-md gap-2 ${className}`}
     >
       {IconLeft && <IconLeft />}

@@ -1,4 +1,6 @@
 import {
+  ActivityIndicator,
+  Alert,
   KeyboardAvoidingView,
   Platform,
   Text,
@@ -8,15 +10,56 @@ import {
 import CustomButton from "@/components/CustomButton";
 import { useNavigation } from "expo-router";
 import CustomInput from "@/components/CustomInput";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { BottomSheetView } from "@gorhom/bottom-sheet";
 import { Ionicons } from "@expo/vector-icons";
+import { z } from "zod";
+import { Controller, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { supabase } from "@/lib/supabase";
+
+const FormSchema = z.object({
+  email: z.string().email({ message: "Invalid email address" }),
+  password: z
+    .string()
+    .min(8, "Password must be at least 8 characters")
+    .refine(
+      (val) => /[a-z]/.test(val) && /[A-Z]/.test(val) && /[0-9]/.test(val),
+      {
+        message:
+          "Password must contain at least one lowercase letter, one uppercase letter and one number",
+      },
+    ),
+});
 
 const Signup = ({ onClose }: { onClose?: () => void }) => {
+  const [loading, setLoading] = useState(false);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+  });
+
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
+    setLoading(true);
+    const { error } = await supabase.auth.signUp({
+      email: data.email,
+      password: data.password,
+    });
+
+    if (error) {
+      Alert.alert(error.message);
+    } else {
+      onClose?.();
+    }
+    setLoading(false);
+  }
+
   const navigation = useNavigation();
-  // References For Next returnKeyType
-  const emailRef = useRef<TextInput>(null);
-  const passwordRef = useRef<TextInput>(null);
   return (
     <BottomSheetView
       style={{
@@ -38,9 +81,59 @@ const Signup = ({ onClose }: { onClose?: () => void }) => {
           Welcome! Please fill in your details.
         </Text>
 
+        <Controller
+          control={control}
+          name="email"
+          render={({ field: { onChange, onBlur, value } }) => (
+            <CustomInput
+              Icon={() => <Ionicons name="mail" size={20} color="gray" />}
+              placeholder="Enter your email"
+              placeholderTextColor="#778DA9"
+              label="Email"
+              onChangeText={onChange}
+              onBlur={onBlur}
+              value={value}
+              error={errors.email?.message}
+            />
+          )}
+        />
+
+        <Controller
+          control={control}
+          name="password"
+          render={({ field: { onChange, onBlur, value } }) => (
+            <CustomInput
+              Icon={() => (
+                <Ionicons name="lock-closed" size={20} color="gray" />
+              )}
+              placeholder="Enter your password"
+              secureTextEntry={!isPasswordVisible}
+              setSecureTextEntry={() =>
+                setIsPasswordVisible(!isPasswordVisible)
+              }
+              placeholderTextColor="#778DA9"
+              label="Password"
+              onChangeText={onChange}
+              onBlur={onBlur}
+              value={value}
+              error={errors.password?.message}
+            />
+          )}
+        />
+
+        <CustomButton
+          title={loading ? "Signing up..." : "Sign up"}
+          className={"w-full bg-secondary-300"}
+          textVariant={"primary"}
+          onPress={handleSubmit(onSubmit)}
+          disabled={loading}
+        />
+
+        <View className="h-px bg-secondary-400 opacity-40 w-full my-8" />
+
         <View className={"gap-4"}>
           <CustomButton
-            title={"Sign Up with Google"}
+            title={"Continue with Google"}
             IconLeft={() => <Ionicons name="logo-google" size={24} />}
             className={"w-full bg-secondary-300"}
             textVariant={"primary"}
@@ -51,7 +144,7 @@ const Signup = ({ onClose }: { onClose?: () => void }) => {
           />
 
           <CustomButton
-            title={"Sign Up with Facebook"}
+            title={"Continue with Facebook"}
             IconLeft={() => <Ionicons name="logo-facebook" size={24} />}
             className={"w-full bg-secondary-300"}
             textVariant={"primary"}
@@ -61,7 +154,7 @@ const Signup = ({ onClose }: { onClose?: () => void }) => {
             }}
           />
           <CustomButton
-            title={"Sign Up with Apple"}
+            title={"Continue with Apple"}
             IconLeft={() => <Ionicons name="logo-apple" size={24} />}
             className={"w-full bg-secondary-300"}
             textVariant={"primary"}
@@ -71,47 +164,6 @@ const Signup = ({ onClose }: { onClose?: () => void }) => {
             }}
           />
         </View>
-
-        <View className="h-px bg-secondary-400 opacity-40 w-full my-8" />
-
-        <CustomInput
-          placeholder={"Enter your Full name"}
-          label={"Fullname"}
-          placeholderTextColor={"gray"}
-          returnKeyType={"next"}
-          onSubmitEditing={() => {
-            emailRef.current?.focus();
-          }}
-        />
-
-        <CustomInput
-          ref={emailRef}
-          placeholder={"Enter your Email"}
-          placeholderTextColor={"gray"}
-          label={"Email"}
-          returnKeyType={"next"}
-          onSubmitEditing={() => {
-            passwordRef.current?.focus();
-          }}
-        />
-        <CustomInput
-          ref={passwordRef}
-          placeholder={"Enter your password"}
-          placeholderTextColor={"gray"}
-          label={"Password"}
-          secureTextEntry={true}
-          returnKeyType={"done"}
-        />
-
-        <CustomButton
-          title={"Sign Up"}
-          className={"w-full bg-secondary-300"}
-          textVariant={"primary"}
-          onPress={() => {
-            navigation.goBack();
-            onClose?.();
-          }}
-        />
       </KeyboardAvoidingView>
     </BottomSheetView>
   );

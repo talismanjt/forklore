@@ -1,4 +1,4 @@
-import { Text, View } from "react-native";
+import { AppState, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CustomButton from "@/components/CustomButton";
 import { Image } from "expo-image";

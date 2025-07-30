@@ -6,6 +6,7 @@ declare interface ButtonProps extends TouchableOpacityProps {
   IconLeft?: React.ComponentType<any>;
   IconRight?: React.ComponentType<any>;
   className?: string;
+  disabled?: boolean;
 }
 
 declare interface CustomHandleProps {
@@ -13,6 +14,7 @@ declare interface CustomHandleProps {
 }
 
 declare interface CustomInputProps {
+  setSecureTextEntry?: React.Dispatch<React.SetStateAction<boolean>>;
   placeholder: string;
   placeholderTextColor?: string;
   secureTextEntry?: boolean;
@@ -22,9 +24,11 @@ declare interface CustomInputProps {
   containerStyle?: string;
   labelStyle?: string;
   label?: string;
-  keyboardType?: string;
   returnKeyType?: ReturnKeyTypeOptions;
-  textContentType?: string;
   onSubmitEditing?: () => void;
   ref?: RefObject<TextInput>;
+  error?: string;
+  onChangeText?: (text: string) => void;
+  value?: string;
+  onBlur?: () => void;
 }
