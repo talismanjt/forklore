@@ -24,12 +24,12 @@ const CustomInput = forwardRef<TextInput, CustomInputProps>(
     ref,
   ) => {
     return (
-      <View className={"flex w-full"}>
+      <View className={"flex-1"}>
         <Text className={`${labelStyle} text-secondary-300 text-left`}>
           {label}
         </Text>
         <View
-          className={`flex-row items-center bg-secondary-400 rounded-md p-3 gap-2 focus:bg-secondary-300 ${containerStyle} my-2`}
+          className={`flex-row items-center p-3 gap-2 focus:bg-secondary-300 ${containerStyle} my-2`}
           style={
             error
               ? { borderWidth: 1, borderColor: "#ef4444", marginBottom: 8 }
@@ -41,7 +41,7 @@ const CustomInput = forwardRef<TextInput, CustomInputProps>(
             onBlur={onBlur}
             ref={ref}
             placeholder={placeholder}
-            className={`w-full  ${inputStyle}`}
+            className={`flex-1 w-full bg-primary ${inputStyle}`}
             secureTextEntry={secureTextEntry}
             placeholderTextColor={placeholderTextColor}
             returnKeyType={returnKeyType}

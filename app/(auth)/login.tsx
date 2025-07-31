@@ -75,6 +75,7 @@ const Login = ({ onClose }: { onClose?: () => void }) => {
           render={({ field: { onChange, onBlur, value } }) => (
             <CustomInput
               Icon={() => <Ionicons name="mail" size={20} color="gray" />}
+              containerStyle={"rounded-lg"}
               placeholder="Enter your email"
               placeholderTextColor="#778DA9"
               label="Email"
@@ -93,6 +94,7 @@ const Login = ({ onClose }: { onClose?: () => void }) => {
               Icon={() => (
                 <Ionicons name="lock-closed" size={20} color="gray" />
               )}
+              containerStyle={"rounded-lg"}
               placeholder="Enter your password"
               secureTextEntry={!isPasswordVisible}
               setSecureTextEntry={() =>
@@ -116,7 +118,7 @@ const Login = ({ onClose }: { onClose?: () => void }) => {
 
         <CustomButton
           title={loading ? "Logging in..." : "Log In"}
-          className="w-full bg-secondary-300"
+          className="w-full bg-secondary-300 px-10 py-4 gap-2"
           textVariant="primary"
           onPress={handleSubmit(onSubmit)}
           disabled={loading}
@@ -126,7 +128,7 @@ const Login = ({ onClose }: { onClose?: () => void }) => {
 
         <CustomButton
           title="Continue with Google"
-          className="w-full bg-secondary-300 mb-4"
+          className="w-full bg-secondary-300 mb-4 px-10 py-4 gap-2"
           IconLeft={() => (
             <Ionicons name="logo-google" size={24} color="#000" />
           )}
@@ -135,7 +137,7 @@ const Login = ({ onClose }: { onClose?: () => void }) => {
         />
         <CustomButton
           title="Continue with Facebook"
-          className="w-full bg-secondary-300 mb-4"
+          className="w-full bg-secondary-300 mb-4 px-10 py-4 gap-2"
           IconLeft={() => (
             <Ionicons name="logo-facebook" size={24} color="#000" />
           )}
@@ -144,7 +146,7 @@ const Login = ({ onClose }: { onClose?: () => void }) => {
         />
         <CustomButton
           title="Continue with Apple"
-          className="w-full bg-secondary-300 mb-20"
+          className="w-full bg-secondary-300 mb-20 px-10 py-4 gap-2"
           IconLeft={() => <Ionicons name="logo-apple" size={24} color="#000" />}
           textVariant="primary"
           onPress={() => {}}

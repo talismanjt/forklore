@@ -15,7 +15,7 @@ const CustomButton = ({
     <TouchableOpacity
       onPress={onPress}
       disabled={disabled}
-      className={`flex-row justify-center items-center px-10 py-4 rounded-md gap-2 ${className}`}
+      className={`flex-row justify-center items-center rounded-md ${className}`}
     >
       {IconLeft && <IconLeft />}
       <Text

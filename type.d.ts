@@ -32,3 +32,11 @@ declare interface CustomInputProps {
   value?: string;
   onBlur?: () => void;
 }
+
+declare interface RecipeProps {
+  image: string;
+  name: string;
+  ingredients: string[];
+  instructions: string[];
+  onPress: () => void;
+}
