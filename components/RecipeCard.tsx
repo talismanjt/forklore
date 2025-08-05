@@ -1,10 +1,10 @@
 import { Text, TouchableOpacity, View } from "react-native";
-import { Image, ImageBackground } from "expo-image";
+import { ImageBackground } from "expo-image";
 
-const Recipe = ({ name, image, ingredients, onPress }: RecipeProps) => {
+const RecipeCard = ({ name, image, ingredients, onPress }: RecipeProps) => {
   return (
     <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
-      <View className={"mx-5 my-2 overflow-hidden rounded-2xl"}>
+      <View className={"my-2 overflow-hidden rounded-2xl"}>
         <ImageBackground
           className={"w-full h-full"}
           contentFit={"cover"}
@@ -22,4 +22,4 @@ const Recipe = ({ name, image, ingredients, onPress }: RecipeProps) => {
   );
 };
 
-export default Recipe;
+export default RecipeCard;

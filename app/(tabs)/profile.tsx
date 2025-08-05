@@ -1,10 +1,10 @@
 import { Text, View } from "react-native";
-import { useEffect, useState } from "react";
-import { User } from "@supabase/supabase-js";
 import { supabase } from "@/lib/supabase";
 import { useRouter } from "expo-router";
 import CustomButton from "@/components/CustomButton";
 import { SafeAreaView } from "react-native-safe-area-context";
+import {useEffect, useState} from "react";
+import {User} from "@supabase/supabase-js";
 
 const Profile = () => {
   const [user, setUser] = useState<User | null>(null);

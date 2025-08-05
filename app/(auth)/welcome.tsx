@@ -54,7 +54,7 @@ const Welcome = () => {
             </Text>
             <View className={"w-full gap-5"}>
               <CustomButton
-                className={"w-full bg-secondary-300"}
+                className={"w-full bg-secondary-300 px-10 py-4"}
                 textVariant={"primary"}
                 title={"Get Started"}
                 onPress={() => {
@@ -63,7 +63,7 @@ const Welcome = () => {
                 }}
               />
               <CustomButton
-                className={"w-full bg-secondary-100 text-secondary-400"}
+                className={"w-full bg-secondary-100 text-secondary-400 px-10 py-4"}
                 textVariant={"secondary"}
                 title={"I Already have an account"}
                 onPress={() => {

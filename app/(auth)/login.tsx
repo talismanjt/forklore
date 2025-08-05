@@ -75,7 +75,8 @@ const Login = ({ onClose }: { onClose?: () => void }) => {
           render={({ field: { onChange, onBlur, value } }) => (
             <CustomInput
               Icon={() => <Ionicons name="mail" size={20} color="gray" />}
-              containerStyle={"rounded-lg"}
+              containerStyle={"rounded-lg bg-secondary-400"}
+              inputStyle={"bg-secondary-400 text-md"}
               placeholder="Enter your email"
               placeholderTextColor="#778DA9"
               label="Email"
@@ -94,7 +95,8 @@ const Login = ({ onClose }: { onClose?: () => void }) => {
               Icon={() => (
                 <Ionicons name="lock-closed" size={20} color="gray" />
               )}
-              containerStyle={"rounded-lg"}
+              containerStyle={"rounded-lg bg-secondary-400"}
+              inputStyle={"bg-secondary-400 text-md"}
               placeholder="Enter your password"
               secureTextEntry={!isPasswordVisible}
               setSecureTextEntry={() =>

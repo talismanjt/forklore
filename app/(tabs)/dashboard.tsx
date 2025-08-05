@@ -1,9 +1,10 @@
 import { SafeAreaView } from "react-native-safe-area-context";
 import CustomInput from "@/components/CustomInput";
 import { Ionicons } from "@expo/vector-icons";
-import { FlatList, View } from "react-native";
+import { FlatList, Text, View } from "react-native";
 import CustomButton from "@/components/CustomButton";
-import Recipe from "@/components/Recipe";
+import RecipeCard from "@/components/RecipeCard";
+import { useAuth } from "@/contexts/AuthContext";
 
 const testData = [
   {
@@ -34,12 +35,32 @@ const testData = [
 ];
 
 const Dashboard = () => {
+  const { user, loading } = useAuth();
+  if (loading) {
+    return (
+      <SafeAreaView className={"flex-1 bg-white justify-center items-center"}>
+        <Text>Loading...</Text>
+      </SafeAreaView>
+    );
+  }
   return (
-    <SafeAreaView className={"flex-1 bg-white"}>
-      <View className={"flex flex-row justify-between items-center mx-5 gap-1"}>
+    <SafeAreaView className={"flex-1 bg-white mx-5"}>
+      <View className={"gap-3"}>
+        <Text className={"text-sm text-secondary-300"}>
+          Hello,
+          <Text className={"font-semibold "}>
+            {" "}
+            {user?.email?.split("@")[0]}
+          </Text>
+        </Text>
+        <Text className={"font-bold text-2xl"}>
+          What would you like to cook today?
+        </Text>
+      </View>
+      <View className={"flex flex-row justify-between items-center gap-1"}>
         <CustomInput
           containerStyle={"bg-secondary-390 rounded-full"}
-          inputStyle={"bg-secondary-390 text-lg"}
+          inputStyle={"bg-secondary-390 text-md"}
           Icon={() => <Ionicons name="search" size={24} color="#BCA88D" />}
           placeholder={"Search for a recipe"}
           placeholderTextColor={"#BCA88D"}
@@ -51,7 +72,7 @@ const Dashboard = () => {
       </View>
       <FlatList
         data={testData}
-        renderItem={({ item }) => <Recipe {...item} onPress={() => {}} />}
+        renderItem={({ item }) => <RecipeCard {...item} onPress={() => {}} />}
       />
     </SafeAreaView>
   );
