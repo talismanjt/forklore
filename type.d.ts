@@ -3,6 +3,7 @@ declare interface ButtonProps extends TouchableOpacityProps {
   title: string;
   bgVariant?: "primary" | "secondary" | "danger" | "outline" | "success";
   textVariant?: "primary" | "secondary" | "danger" | "success";
+  textStyle?: string;
   IconLeft?: React.ComponentType<any>;
   IconRight?: React.ComponentType<any>;
   className?: string;
@@ -34,9 +35,16 @@ declare interface CustomInputProps {
 }
 
 declare interface RecipeProps {
+  id: number;
   image: string;
   name: string;
   ingredients: string[];
   instructions: string[];
   onPress: () => void;
+}
+
+declare interface CustomDropdownProps {
+  selectedItem: string;
+  setSelectedItem: (value: string) => void;
+  data: Data[];
 }

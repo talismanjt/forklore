@@ -3,31 +3,10 @@ import { supabase } from "@/lib/supabase";
 import { useRouter } from "expo-router";
 import CustomButton from "@/components/CustomButton";
 import { SafeAreaView } from "react-native-safe-area-context";
-import {useEffect, useState} from "react";
-import {User} from "@supabase/supabase-js";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Profile = () => {
-  const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const getUser = async () => {
-      try {
-        const { data, error } = await supabase.auth.getUser();
-        if (error) {
-          console.log(error);
-        } else {
-          setUser(data.user);
-          setLoading(false);
-        }
-      } catch (err) {
-        console.error("Unexpected error:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    void getUser();
-  }, []);
+  const { user, loading, signOut } = useAuth();
 
   const router = useRouter();
   return (
@@ -46,7 +25,7 @@ const Profile = () => {
           title={"Logout"}
           className={"bg-secondary-100"}
           onPress={async () => {
-            await supabase.auth.signOut();
+            await signOut();
             router.push("/(auth)/welcome");
           }}
         />

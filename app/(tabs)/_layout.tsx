@@ -1,32 +1,8 @@
 import { Tabs } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import CustomTabBarButton from "@/components/CustomTabBarButton";
-import {useEffect, useState} from "react";
-import {User} from "@supabase/supabase-js";
-import {supabase} from "@/lib/supabase";
 
 const TabLayout = () => {
-    const [user, setUser] = useState<User | null>(null);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const getUser = async () => {
-            try {
-                const { data, error } = await supabase.auth.getUser();
-                if (error) {
-                    console.log(error);
-                } else {
-                    setUser(data.user);
-                    setLoading(false);
-                }
-            } catch (err) {
-                console.error("Unexpected error:", err);
-            } finally {
-                setLoading(false);
-            }
-        };
-        void getUser();
-    }, []);
   return (
     <Tabs
       screenOptions={{

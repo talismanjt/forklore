@@ -1,7 +1,7 @@
 ![Owl and Fork Logo](assets/images/forklore-logo.png)
 
-## A modern, simple Recipe Cross-Platform mobile application
-Forklore is a sleek and efficient Recipe application developed using the Expo framework and React Native, crafted specifically for mobile platforms. Designed to enhance your culinary journey, Forklore offers users an intuitive and interactive interface for discovering, saving, and managing recipes effortlessly.
+## A modern, simple RecipeCard Cross-Platform mobile application
+Forklore is a sleek and efficient RecipeCard application developed using the Expo framework and React Native, crafted specifically for mobile platforms. Designed to enhance your culinary journey, Forklore offers users an intuitive and interactive interface for discovering, saving, and managing recipes effortlessly.
 
 ## Key Features
 
@@ -11,7 +11,7 @@ Forklore runs seamlessly on both iOS and Android devices, leveraging Expo's robu
 ### User-Friendly Interface
 With a clean, easy-to-navigate UI, Forklore allows users to browse, save, and organize recipes with minimal effort. The use of React Native ensures a smooth, native-like user experience.
 
-### Recipe Management
+### RecipeCard Management
 Easily save your favorite recipes, create shopping lists, and organize your culinary collection with real-time synchronization across all your devices.
 
 ### Smart Search & Categories

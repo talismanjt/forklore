@@ -50,11 +50,12 @@ const Welcome = () => {
             <Text
               className={"w-full text-md text-secondary-400 text-center mb-5"}
             >
-              Get cooking with ease! Discover new flavors and organize your kitchen adventures with our dynamic recipe management tool.
+              Get cooking with ease! Discover new flavors and organize your
+              kitchen adventures with our dynamic recipe management tool.
             </Text>
             <View className={"w-full gap-5"}>
               <CustomButton
-                className={"w-full bg-secondary-300 px-10 py-4"}
+                className={"w-full bg-secondary-300 px-10 py-4 rounded-md"}
                 textVariant={"primary"}
                 title={"Get Started"}
                 onPress={() => {
@@ -63,7 +64,9 @@ const Welcome = () => {
                 }}
               />
               <CustomButton
-                className={"w-full bg-secondary-100 text-secondary-400 px-10 py-4"}
+                className={
+                  "w-full bg-secondary-100 text-secondary-400 px-10 py-4 rounded-md"
+                }
                 textVariant={"secondary"}
                 title={"I Already have an account"}
                 onPress={() => {

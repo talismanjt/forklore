@@ -127,7 +127,7 @@ const Signup = ({ onClose }: { onClose?: () => void }) => {
 
         <CustomButton
           title={loading ? "Signing up..." : "Sign up"}
-          className={"w-full bg-secondary-300 mt-5 px-10 py-4 gap-2"}
+          className={"w-full bg-secondary-300 mt-5 px-10 py-4 gap-2 rounded-md"}
           textVariant={"primary"}
           onPress={handleSubmit(onSubmit)}
           disabled={loading}
@@ -139,7 +139,7 @@ const Signup = ({ onClose }: { onClose?: () => void }) => {
           <CustomButton
             title={"Continue with Google"}
             IconLeft={() => <Ionicons name="logo-google" size={24} />}
-            className={"w-full bg-secondary-300 px-10 py-4 gap-2"}
+            className={"w-full bg-secondary-300 px-10 py-4 gap-2 rounded-md"}
             textVariant={"primary"}
             onPress={() => {
               navigation.goBack();
@@ -150,7 +150,7 @@ const Signup = ({ onClose }: { onClose?: () => void }) => {
           <CustomButton
             title={"Continue with Facebook"}
             IconLeft={() => <Ionicons name="logo-facebook" size={24} />}
-            className={"w-full bg-secondary-300 px-10 py-4 gap-2"}
+            className={"w-full bg-secondary-300 px-10 py-4 gap-2 rounded-md"}
             textVariant={"primary"}
             onPress={() => {
               navigation.goBack();
@@ -160,7 +160,7 @@ const Signup = ({ onClose }: { onClose?: () => void }) => {
           <CustomButton
             title={"Continue with Apple"}
             IconLeft={() => <Ionicons name="logo-apple" size={24} />}
-            className={"w-full bg-secondary-300 px-10 py-4 gap-2"}
+            className={"w-full bg-secondary-300 px-10 py-4 gap-2 rounded-md"}
             textVariant={"primary"}
             onPress={() => {
               navigation.goBack();

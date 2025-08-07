@@ -6,6 +6,7 @@ const CustomButton = ({
   onPress,
   bgVariant = "primary",
   textVariant = "secondary",
+  textStyle = "text-md",
   IconLeft,
   IconRight,
   className,
@@ -15,11 +16,11 @@ const CustomButton = ({
     <TouchableOpacity
       onPress={onPress}
       disabled={disabled}
-      className={`flex-row justify-center items-center rounded-md ${className}`}
+      className={`flex-row justify-center items-center ${className}`}
     >
       {IconLeft && <IconLeft />}
       <Text
-        className={`font-semibold ${textVariant === "primary" ? "text-primary" : "text-secondary-400"}`}
+        className={`font-semibold ${textStyle} ${textVariant === "primary" ? "text-primary" : "text-secondary-400"}`}
       >
         {title}
       </Text>
