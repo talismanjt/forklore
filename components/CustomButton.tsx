@@ -9,6 +9,8 @@ const CustomButton = ({
   textStyle = "text-md",
   IconLeft,
   IconRight,
+  IconTop,
+  vertical = false,
   className,
   ...props
 }: ButtonProps) => {
@@ -16,14 +18,23 @@ const CustomButton = ({
     <TouchableOpacity
       onPress={onPress}
       disabled={disabled}
-      className={`flex-row justify-center items-center ${className}`}
+      className={`${
+        vertical ? "flex-col" : "flex-row"
+      } justify-center items-center ${className}`}
     >
+      {IconTop && <IconTop />}
       {IconLeft && <IconLeft />}
-      <Text
-        className={`font-semibold ${textStyle} ${textVariant === "primary" ? "text-primary" : "text-secondary-400"}`}
-      >
-        {title}
-      </Text>
+
+      {title && (
+        <Text
+          className={`${textStyle}  ${
+            textVariant === "primary" ? "text-primary" : "text-secondary-400"
+          }`}
+        >
+          {title}
+        </Text>
+      )}
+
       {IconRight && <IconRight />}
     </TouchableOpacity>
   );

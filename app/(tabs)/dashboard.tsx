@@ -3,7 +3,7 @@ import CustomInput from "@/components/CustomInput";
 import { Ionicons } from "@expo/vector-icons";
 import { FlatList, Text, TouchableOpacity, View } from "react-native";
 import CustomButton from "@/components/CustomButton";
-import RecipeCard from "@/components/RecipeCard";
+import RecipeCard from "@/components/cards/RecipeCard";
 import { useAuth } from "@/contexts/AuthContext";
 import { Image } from "expo-image";
 import { useState } from "react";
